@@ -1,0 +1,7 @@
+.jumbotron
+  %h2.title-colored Поиск одинаковых изображений
+  - @image_hash.each do |hash|
+    %p
+      = hash[:filename]
+      \-
+      = "#{ hash[:count]} шт."

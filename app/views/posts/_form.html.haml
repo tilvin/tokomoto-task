@@ -1,0 +1,21 @@
+.jumbotron
+  .row
+    .col-md-3
+    .col-md-6
+      %h2.text-center Создать новый пост
+      = form_for @post, html: { class: 'form-horizontal' } do |f|
+        .form-group
+          = f.label 'Название поста'
+          = f.text_field :title, class: 'form-control'
+          = show_errors(f.object.errors, :title)
+        .form-group
+          = f.label 'Текст поста'
+          = f.text_area :text, class: 'form-control', style: 'height: 200px'
+          = show_errors(f.object.errors, :text)
+        .form-group
+          = f.label 'Картинка к посту'
+          = f.file_field :image, class: 'form-control'
+        .form-group.text-center
+          = f.submit 'Сохранить', class: 'btn btn-success'
+          = link_to 'Отменить', posts_path, class: 'btn btn-default'
+    .col-md-3

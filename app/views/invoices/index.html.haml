@@ -1,0 +1,13 @@
+.jumbotron
+  %h2.title-colored Накладные
+  %table.table
+    %thead
+      %td id
+      %td name
+      %td created_at
+    %tbody
+      - @invoices.each do |invoice|
+        %tr
+        %td= invoice.id
+        %td= invoice.name
+        %td= invoice.created_at.strftime('%d.%m.%Y %H:%M')

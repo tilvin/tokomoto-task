@@ -1,0 +1,13 @@
+- @posts.each do |post|
+  .jumbotron
+    = link_to (image_tag post.image, width: '100%'), post_path(post)
+    %h2.title-colored= link_to post.title, post_path(post)
+    %h4
+      %small
+        %em= Russian::strftime(post.created_at, "%d %B %Y")
+    %p.text-justify
+      = link_to "#{ post.text }...", post_path(post), style:'color: inherit; text-decoration: none;'
+    %p
+      - if current_user && post.user == current_user
+        = link_to 'Изменить', edit_post_path(post), class: 'btn btn-warning'
+        = link_to 'Удалить', post_path(post), method: :delete, class: 'btn btn-danger'

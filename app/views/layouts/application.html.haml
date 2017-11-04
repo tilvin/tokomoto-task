@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Travel-blog
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    .container
+      %nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+            .row
+              .col-md-3
+                = link_to (image_tag 'logo.png', size: '50x50'), root_path
+              .col-md-9
+                %strong= link_to 'Блог-бложик', root_path, class: 'navbar-brand'
+          #navbar.collapse.navbar-collapse
+            %ul.nav.navbar-nav.navbar-right
+              %li.title-colored= link_to 'Картинки', pictures_path
+              %li.title-colored= link_to 'Накладные', invoices_path
+              - if current_user
+                %li{style: 'padding-top: 15px;'}= "Здравствуйте, #{current_user.email}"
+                %li.title-colored= link_to 'Добавить пост', new_post_path if current_user.owner?
+                %li.title-colored= link_to "Выйти", destroy_user_session_path, method: :delete
+              - else
+                %li.title-colored= link_to 'Регистрация', new_registration_path(:user)
+                %li.title-colored= link_to "Войти", new_user_session_path
+      = yield
+      %footer
+        .jumbotron
+          = image_tag 'footer.png', width: "100%"

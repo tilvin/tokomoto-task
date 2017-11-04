@@ -1,0 +1,14 @@
+.jumbotron
+  .row
+    = image_tag @post.image, width: '100%'
+    %h2
+      = @post.title
+    %p
+      = Russian::strftime(@post.created_at, "%d %B %Y")
+    %p
+      = @post.text
+    %p
+      = link_to 'Вернуться', posts_path, class: 'btn btn-primary'
+      - if current_user && @post.user == current_user
+        = link_to 'Изменить', edit_post_path(@post), class: 'btn btn-warning'
+        = link_to 'Удалить', post_path(@post), method: :delete, class: 'btn btn-danger'
